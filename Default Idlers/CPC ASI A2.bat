@@ -30,7 +30,7 @@
 ::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::
-:: Profile Name - Putting a name here that does not corrospond to a profile you have made, will create a default profile. So put any name here you like.
+:: Profile Name - Putting a name here that does not correspond to a profile you have made, will create a default profile. So put any name here you like.
 set cpcname="-name=Girl Gamer"
 :: This is where your nircmd.exe is located.
 set cpcnir=C:\CPC
@@ -48,6 +48,8 @@ set arma2filepath=C:\Program Files (x86)\Steam\SteamApps\common\
 set cpcbasearma=Arma 2
 ::  DayZ Launch Parameters, you only need @DayZ_Epoch to idle but you can insert your other mods such as @ACEX_SM. Separate with semi colons e.g @DayZ_Epoch;@ACEX_SM;@Othermodshere
 set cpclaunch=@DayZ_Epoch
+:: Password? None/empty by default
+set cpcpassword=""
 :: Additional launch parameters, nosplash(removes intro movies) and nopause(prevents the game from freezing while minimized but due to being minimized uses little resources) are necessary for idling to prevent slow loading times and the game timing out. You can add your other launch parameters for performance if you wish e.g -maxMem=2047 -cpuCount=4 -exThreads=7 -nosplash -winxp -skipintro -nopause - -window is untested for full screen and I recommend you leave it in but feel free to test and feedback me.
 set cpcadd=-nosplash -nopause -window -skipintro
 :: This is how long your game takes to get into the lobby. As soon as you are in the lobby, the countdown timer to start the mission starts but you must reach the lobby first. Please do a few tests to perfect it or allow a few seconds for variance. Your Arma window will be minimized after this time. Default for debugging is is 60, amend as necessary.
@@ -92,7 +94,7 @@ cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server. This is the first stage, it will disconnect in enough time to start the mission to prevent you from idling alive in game. Do not close the loop at this stage.
-start .\Expansion\beta\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -connect=%cpcip% -port=%cpcport% %cpcname%
+start .\Expansion\beta\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -password=%cpcpassword% -connect=%cpcip% -port=%cpcport% %cpcname%
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
@@ -110,7 +112,7 @@ cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server.
-start .\Expansion\beta\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -connect=%cpcip% -port=%cpcport% %cpcname%
+start .\Expansion\beta\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -password=%cpcpassword% -connect=%cpcip% -port=%cpcport% %cpcname%
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
