@@ -124,7 +124,7 @@ cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server.
-start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%"
+start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%" -window
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
