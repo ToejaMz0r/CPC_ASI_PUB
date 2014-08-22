@@ -39,7 +39,7 @@ set cpcip=188.165.222.198
 :: Server Port - DayZ Epoch Arma 2 Default 2302
 set cpcport=2302
 :: This is your arma 2 exe name. Default is arma2oa.exe
-set arma2exe=ArmA2OA.exe
+set arma2exe=ArmA2OA_BE.exe
 :: Operation Arrow Head folder name, default is "ARMA 2 Operation Arrowhead"
 set cpcopaon=ARMA 2 Operation Arrowhead
 :: This is path that leads up to the folder name above.
@@ -56,8 +56,8 @@ set cpcadd=-nosplash -nopause -window -skipintro
 set cpclobbyidle=60
 :: This number represents how long the first short cycle will last, if you are the first person on the server after a restart, you will activate the mission start timer, this timer for mission starting is 90 seconds. You do not need to change this number, just make sure the value above is set correctly to coincide for when you reach the lobby to start the timer off. This will prevent you from being spawned in and dying as the game will be shut down and the next part of the cycle will land you in the lobby for idling.
 set cpcioffset=180
-:: This is the time between informational steps, this can be set to 0 to turn these timeouts off. Default is 5
-set cpcinfo=5
+:: This is the time between informational steps, this can be set to 0 to turn these timeouts off. Default is 2
+set cpcinfo=2
 :: This is how long before the loop (cmd) window will close. Default is 10.
 set cpcloopwin=10
 :: This is how often the loop will be restarted. Default is 1800 seconds (30minutes)
@@ -87,6 +87,7 @@ timeout /t %cpcinfo% /nobreak > NUL
 @echo.
 @echo. Arma 2 kill process signal sent.
 taskkill /im %arma2exe%
+taskkill /im arma2oa.exe
 timeout /t %cpcinfo% /nobreak > NUL
 
 cd\
@@ -94,7 +95,7 @@ cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server. This is the first stage, it will disconnect in enough time to start the mission to prevent you from idling alive in game. Do not close the loop at this stage.
-start .\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -password=%cpcpassword% -connect=%cpcip% -port=%cpcport% %cpcname%
+start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%"
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
@@ -106,13 +107,14 @@ start %cpcnir%\nircmd.exe win min process arma2oa.exe
 @echo. Waiting to make sure the DayZ mission starts. You can skip this step by pressing any key.
 timeout /t %cpcioffset%
 taskkill /im %arma2exe%
+taskkill /im arma2oa.exe
 timeout /t %cpcinfo% /nobreak > NUL
 cd\
 cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server.
-start .\%arma2exe% "-mod=%arma2filepath%%cpcbasearma%;expansion;expansion\beta;expansion\beta\expansion;%cpclaunch%" %cpcadd% -password=%cpcpassword% -connect=%cpcip% -port=%cpcport% %cpcname%
+start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%"
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
