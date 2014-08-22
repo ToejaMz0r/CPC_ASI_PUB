@@ -38,8 +38,10 @@ set cpcnir=C:\CPC
 set cpcip=188.165.222.198
 :: Server Port - DayZ Epoch Arma 2 Default 2302
 set cpcport=2302
-:: This is your arma 2 exe name. Default is arma2oa.exe
+:: This is your arma 2 exe name that is used to launch the game, since the Steam changeover it launches through Arma2OA_BE by default which then continues to load Arma2OA.exe so we now need two exes for this batch to work. Default is arma2oa_be.exe
 set arma2exe=ArmA2OA_BE.exe
+:: This is the old Arma 2 Exe - No need to change but is required. Default is arma2oa.exe
+set arma2exeold=arma2oa.exe
 :: Operation Arrow Head folder name, default is "ARMA 2 Operation Arrowhead"
 set cpcopaon=ARMA 2 Operation Arrowhead
 :: This is path that leads up to the folder name above.
@@ -88,10 +90,10 @@ timeout /t %cpcinfo% /nobreak > NUL
 @echo. Arma 2 kill process signal sent.
 taskkill /im %arma2exe%
 timeout 1
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
 timeout /t %cpcinfo% /nobreak > NUL
 
 cd\
@@ -112,23 +114,23 @@ start %cpcnir%\nircmd.exe win min process arma2oa.exe
 timeout /t %cpcioffset%
 taskkill /im %arma2exe%
 timeout 1
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
-taskkill /im arma2oa.exe
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
 timeout /t %cpcinfo% /nobreak > NUL
 cd\
 cd /D %arma2filepath%%cpcopaon%
 @echo.
 @echo.
 @echo. Starting Arma 2 and connecting to the server.
-start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%" -window
+start ""  "%arma2filepath%%cpcopaon%\ArmA2OA_BE.exe" 0 0 -mod=%cpclaunch% -connect=%cpcip% -port=%cpcport% -password=%cpcpassword% "-mod=%arma2filepath%%cpcbasearma%;expansion;%cpcadd%"
 @echo.
 @echo.
 timeout /t %cpcinfo% /nobreak > NUL
 @echo. Waiting for Arma 2 to connect to the server before minimizing the game.
 timeout /t %cpclobbyidle% /nobreak > NUL
-start %cpcnir%\nircmd.exe win min process %arma2exe%
+start %cpcnir%\nircmd.exe win min process %arma2exeold%
 @echo.
 @echo.
 @echo. Arma 2 window minimized. This loop will minimize in %cpcloopwin% seconds.
