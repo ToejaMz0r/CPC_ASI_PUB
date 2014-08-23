@@ -37,6 +37,8 @@ set cpcip=188.165.222.198
 set cpcport=2302
 :: This is your arma 2 exe name. Default is arma2oa.exe
 set arma2exe=ArmA2OA_BE.exe
+:: This is the old Arma 2 Exe - No need to change but is required. Default is arma2oa.exe
+set arma2exeold=arma2oa.exe
 :: Operation Arrow Head folder name, default is "ARMA 2 Operation Arrowhead"
 set cpcopaon=ARMA 2 Operation Arrowhead
 :: This is path that leads up to the folder name above.
@@ -77,7 +79,10 @@ timeout /t %cpcinfo% /nobreak > NUL
 @echo.
 @echo. Arma 2 kill process signal sent.
 taskkill /im %arma2exe%
-taskkill /im arma2oa.exe
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
+taskkill /im %arma2exeold%
 timeout /t %cpcinfo% /nobreak > NUL
 cd\
 cd /D %arma2filepath%%cpcopaon%
